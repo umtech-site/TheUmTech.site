@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-ray Fundamentals | TheUmTech.Site</title>
+    <style>
+        /* Reusing the same styles from main page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #6c63ff;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255, 0, 0, 0.3) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(128, 0, 128, 0.3) 100%);
+            opacity: 0;
+            animation: flash 3s infinite;
+            z-index: 0;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            10%, 30%, 50%, 70%, 90% { opacity: 0.7; }
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background-color: white;
+            color: #6c63ff;
+        }
+
+        .btn-signup {
+            background-color: #ffd700;
+            border: 2px solid #ffd700;
+            color: #333;
+        }
+
+        .btn-signup:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        /* Course Hero */
+        .course-hero {
+            background: linear-gradient(rgba(108, 99, 255, 0.8), rgba(108, 99, 255, 0.8)), 
+                        url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 5% 80px;
+            text-align: center;
+        }
+
+        .course-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .course-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .meta-item i {
+            margin-right: 8px;
+            color: #ffd700;
+        }
+
+        /* Course Content */
+        .course-container {
+            display: flex;
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .course-sidebar {
+            flex: 0 0 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #4a42d6;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .module-list {
+            list-style: none;
+        }
+
+        .module-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .module-item a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .module-item a:hover {
+            color: #6c63ff;
+        }
+
+        .module-item i {
+            margin-right: 10px;
+            color: #6c63ff;
+        }
+
+        .module-item.active a {
+            color: #6c63ff;
+            font-weight: 600;
+        }
+
+        .course-main {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-title {
+            font-size: 32px;
+            color: #4a42d6;
+            margin-bottom: 20px;
+        }
+
+        .course-content {
+            line-height: 1.8;
+        }
+
+        .course-content h2 {
+            color: #4a42d6;
+            margin: 30px 0 15px;
+            font-size: 24px;
+        }
+
+        .course-content p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .course-content ul, .course-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .course-content li {
+            margin-bottom: 8px;
+        }
+
+        .content-image {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .content-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: #6c63ff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a42d6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: #444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #6c63ff;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .course-container {
+                flex-direction: column;
+            }
+            
+            .course-sidebar {
+                flex: 1;
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .course-hero h1 {
+                font-size: 36px;
+            }
+
+            .course-hero p {
+                font-size: 18px;
+            }
+
+            .course-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">TheUmTech.<span>Site</span></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Blog</a>
+            <a href="#">Notes</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="/vanilalogin.html"><button class="btn btn-login">Login</button></a>
+            <a href="/signup.html"><button class="btn btn-signup">Signup</button></a>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <h1>X-ray Imaging Fundamentals</h1>
+        <p>Master the essential principles of X-ray technology, from basic physics to image interpretation, with this comprehensive course designed for medical students and professionals.</p>
+        <div class="course-meta">
+            <div class="meta-item">
+                <i class="fas fa-clock"></i> 12 Lessons
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-chart-line"></i> Beginner Level
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-certificate"></i> Certificate
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Content -->
+    <div class="course-container">
+        <aside class="course-sidebar">
+            <h3 class="sidebar-title">Course Modules</h3>
+            <ul class="module-list">
+                <li class="module-item active">
+                    <a href="#"><i class="fas fa-play-circle"></i> Introduction to X-rays</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Physics of X-ray Production</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> X-ray Equipment</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Radiation Safety</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Patient Positioning</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Chest X-ray Interpretation</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Abdominal X-ray Interpretation</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Musculoskeletal X-rays</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Common Pathologies</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Quality Control</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Case Studies</a>
+                </li>
+                <li class="module-item">
+                    <a href="#"><i class="fas fa-play-circle"></i> Final Assessment</a>
+                </li>
+            </ul>
+            <a href="#" class="btn-primary">Enroll in Course</a>
+        </aside>
+
+        <main class="course-main">
+            <h1 class="course-title">Introduction to X-rays</h1>
+            <div class="course-content">
+                <p>Welcome to the X-ray Imaging Fundamentals course. This module will introduce you to the basic concepts of X-ray imaging, its history, and its importance in modern medicine.</p>
+                
+                <h2>What are X-rays?</h2>
+                <p>X-rays are a form of electromagnetic radiation with wavelengths shorter than visible light. They were discovered in 1895 by Wilhelm Conrad Röntgen, who received the first Nobel Prize in Physics for this discovery.</p>
+                
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="X-ray machine">
+                    <p class="image-caption">Modern digital X-ray machine</p>
+                </div>
+                
+                <h2>Basic Principles of X-ray Imaging</h2>
+                <p>X-ray imaging works on the following principles:</p>
+                <ul>
+                    <li>X-rays are produced when high-energy electrons collide with a metal target</li>
+                    <li>Different tissues absorb X-rays to varying degrees (radiodensity)</li>
+                    <li>The X-rays that pass through the patient are captured to form an image</li>
+                    <li>Dense structures (like bone) appear white, while air appears black</li>
+                </ul>
+                
+                <h2>Medical Applications</h2>
+                <p>X-rays are used for various diagnostic purposes:</p>
+                <ol>
+                    <li><strong>Chest X-rays:</strong> Evaluate lungs, heart, and chest structures</li>
+                    <li><strong>Abdominal X-rays:</strong> Assess bowel, kidneys, and other abdominal organs</li>
+                    <li><strong>Musculoskeletal:</strong> Detect fractures, dislocations, and bone abnormalities</li>
+                    <li><strong>Dental:</strong> Examine teeth and jaw structures</li>
+                    <li><strong>Mammography:</strong> Specialized X-ray for breast tissue examination</li>
+                </ol>
+                
+                <h2>Safety Considerations</h2>
+                <p>While X-rays are invaluable diagnostic tools, they do involve ionizing radiation. Key safety principles include:</p>
+                <ul>
+                    <li>ALARA principle (As Low As Reasonably Achievable)</li>
+                    <li>Proper shielding with lead aprons and barriers</li>
+                    <li>Minimizing repeat exposures</li>
+                    <li>Special precautions for pregnant patients</li>
+                </ul>
+                
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Radiation protection">
+                    <p class="image-caption">Radiation protection equipment</p>
+                </div>
+                
+                <h2>Key Terminology</h2>
+                <p>Familiarize yourself with these essential terms:</p>
+                <ul>
+                    <li><strong>Radiolucent:</strong> Allows X-rays to pass through (appears dark)</li>
+                    <li><strong>Radiopaque:</strong> Blocks X-rays (appears white)</li>
+                    <li><strong>kVp:</strong> Kilovoltage peak - controls X-ray beam penetration</li>
+                    <li><strong>mAs:</strong> Milliampere-seconds - controls quantity of X-rays</li>
+                    <li><strong>Contrast:</strong> Difference in density between adjacent structures</li>
+                </ul>
+                
+                <a href="#" class="btn-primary">Next Lesson: Physics of X-ray Production</a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>TheUmTech.Site</h3>
+                <p>Your premier destination for radiology education and professional development in medical imaging technologies.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Boston, MA</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@theumtech.site</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TheUmTech.Site. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced flashing effect with JavaScript
+        const navbar = document.querySelector('.navbar');
+        const colors = ['rgba(255, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)', 'rgba(128, 0, 128, 0.5)'];
+        
+        function randomFlash() {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            navbar.style.boxShadow = `0 0 30px 10px ${randomColor}`;
+            setTimeout(() => {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }, 200);
+        }
+
+        // Flash every 1-3 seconds randomly
+        setInterval(randomFlash, Math.random() * 2000 + 1000);
+
+        // Simple module navigation
+        document.querySelectorAll('.module-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.module-item.active').classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
