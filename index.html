@@ -16,6 +16,7 @@
         body {
             background-color: #f8f9fa;
             color: #333;
+            line-height: 1.6;
         }
 
         /* Navbar with Flashing Lights */
@@ -157,6 +158,228 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* Features Section */
+        .features {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #4a42d6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            color: #6c63ff;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 80px 5%;
+            background-color: #f0f2f5;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-img {
+            height: 180px;
+            background-color: #6c63ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .course-desc {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #6c63ff;
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #6c63ff;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #6c63ff, #4a42d6);
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: #444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #6c63ff;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .navbar {
@@ -168,8 +391,17 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Navbar with Flashing Lights -->
@@ -184,17 +416,164 @@
             <a href="#">Contact</a>
         </div>
         <div class="auth-buttons">
-            <a href="/vanilalogin.html"><button class="btn btn-login" >Login</button></a>
-            <a href="/signup.html"></a><button class="btn btn-signup">Signup</button></a>
+            <a href="/vanilalogin.html"><button class="btn btn-login">Login</button></a>
+            <a href="/signup.html"><button class="btn btn-signup">Signup</button></a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <h1>Start Learning Radiology Skills Today</h1>
-        <p>Master Radiology knowledge, procedures, and cutting-edge healthcare technologies with our tutorials.</p>
+        <p>Master Radiology knowledge, procedures, and cutting-edge healthcare technologies with our comprehensive tutorials and courses designed for medical professionals and students.</p>
         <a href="#" class="btn-primary">Start Learning » Tutorials</a>
     </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Choose TheUmTech.Site</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="feature-title">Expert Instructors</h3>
+                <p>Learn from certified radiologists and medical professionals with years of practical experience in the field.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-laptop-medical"></i>
+                </div>
+                <h3 class="feature-title">Hands-on Training</h3>
+                <p>Practical, real-world scenarios and case studies to help you apply what you learn immediately.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3 class="feature-title">Certification</h3>
+                <p>Earn recognized certificates to validate your skills and advance your medical career.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses">
+        <h2 class="section-title">Popular Courses</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-img">
+                    X-ray Fundamentals
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">X-ray Imaging Basics</h3>
+                    <p class="course-desc">Master the fundamentals of X-ray technology and interpretation techniques.</p>
+                    <div class="course-meta">
+                        <span>12 Lessons</span>
+                        <span>Beginner</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-img">
+                    CT Scans
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">CT Scan Interpretation</h3>
+                    <p class="course-desc">Learn to read and analyze CT scans with confidence and accuracy.</p>
+                    <div class="course-meta">
+                        <span>18 Lessons</span>
+                        <span>Intermediate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-img">
+                    MRI Tech
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">MRI Technology Mastery</h3>
+                    <p class="course-desc">Comprehensive guide to MRI procedures, safety, and image analysis.</p>
+                    <div class="course-meta">
+                        <span>24 Lessons</span>
+                        <span>Advanced</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Students Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"TheUmTech.Site transformed my understanding of radiology. The courses are well-structured and the instructors are incredibly knowledgeable."</p>
+                <p class="testimonial-author">- Dr. Sarah Johnson, Radiologist</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As a medical student, these tutorials helped me ace my radiology rotation. The practical examples made complex concepts easy to understand."</p>
+                <p class="testimonial-author">- Michael Chen, Medical Student</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The best investment in my professional development. I've recommended TheUmTech to all my colleagues in the radiology department."</p>
+                <p class="testimonial-author">- Robert Williams, Radiology Tech</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Advance Your Radiology Skills?</h2>
+        <p>Join thousands of medical professionals who have already transformed their careers with our comprehensive radiology education platform.</p>
+        <a href="#" class="btn-primary">Get Started Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>TheUmTech.Site</h3>
+                <p>Your premier destination for radiology education and professional development in medical imaging technologies.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Boston, MA</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@theumtech.site</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TheUmTech.Site. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script>
         // Enhanced flashing effect with JavaScript
@@ -211,8 +590,6 @@
 
         // Flash every 1-3 seconds randomly
         setInterval(randomFlash, Math.random() * 2000 + 1000);
-
-      
     </script>
 </body>
 </html>
