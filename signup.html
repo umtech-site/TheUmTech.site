@@ -66,10 +66,26 @@
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .brand-logo span {
             color: #ffd700;
+        }
+
+        .brand-logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffd700;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a42d6;
+            font-weight: bold;
+            font-size: 20px;
         }
 
         .brand-text {
@@ -170,9 +186,29 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .btn-google img {
+        .google-logo {
             width: 20px;
             height: 20px;
+            background: conic-gradient(
+                from -45deg, 
+                #ea4335 0deg 90deg, 
+                #4285f4 90deg 180deg, 
+                #34a853 180deg 270deg, 
+                #fbbc05 270deg 360deg
+            );
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .google-logo::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            top: -2px;
+            right: -2px;
+            border-radius: 50%;
         }
 
         /* Divider */
@@ -214,6 +250,61 @@
             text-decoration: underline;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4a42d6;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(108, 99, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #6c63ff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .auth-container {
@@ -240,7 +331,10 @@
         <!-- Brand Panel -->
         <div class="brand-panel">
             <div class="brand-content">
-                <div class="brand-logo">theumtech.<span>site</span></div>
+                <div class="brand-logo">
+                    <div class="brand-logo-icon">UT</div>
+                    <div>theumtech.<span>site</span></div>
+                </div>
                 <div class="brand-text">
                     <h2>Radiology Learning Platform</h2>
                     <p>Access premium medical imaging courses, DICOM analysis tools, and radiology resources with your account.</p>
@@ -330,35 +424,230 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Create Account</button>
+                        <button type="submit" class="btn btn-primary" id="signup-btn">
+                            <span id="signup-btn-text">Create Account</span>
+                            <span id="signup-btn-spinner" class="spinner" style="display: none;"></span>
+                        </button>
                         <div class="divider">or</div>
-                        <div id="google-signup-btn" class="btn-google">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
-                            Sign up with Google
+                        <div id="g_id_onload"
+                            data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                            data-context="signup"
+                            data-ux_mode="popup"
+                            data-callback="handleGoogleSignIn"
+                            data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-shape="rectangular"
+                            data-theme="outline"
+                            data-text="signup_with"
+                            data-size="large"
+                            data-logo_alignment="left">
                         </div>
                     </div>
                 </form>
                 <div class="form-toggle">
-                    Already have an account? <a href="vanilalogin.html">Log in</a>
+                    Already have an account? <a href="#" id="login-link">Log in</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Login to Your Account</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-input" required placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="login-btn">
+                        <span id="login-btn-text">Log In</span>
+                        <span id="login-btn-spinner" class="spinner" style="display: none;"></span>
+                    </button>
+                    <div class="divider">or</div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-shape="rectangular"
+                        data-theme="outline"
+                        data-text="continue_with"
+                        data-size="large"
+                        data-logo_alignment="left">
+                    </div>
+                </div>
+            </form>
+            <div class="form-toggle">
+                Don't have an account? <a href="#" id="signup-link">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Identity Services SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
     <script>
-        document.getElementById('signup').addEventListener('submit', function(e) {
+        // DOM Elements
+        const loginLink = document.getElementById('login-link');
+        const signupLink = document.getElementById('signup-link');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const signupForm = document.getElementById('signup');
+        const loginForm = document.getElementById('login-form');
+        const signupBtn = document.getElementById('signup-btn');
+        const signupBtnText = document.getElementById('signup-btn-text');
+        const signupBtnSpinner = document.getElementById('signup-btn-spinner');
+        const loginBtn = document.getElementById('login-btn');
+        const loginBtnText = document.getElementById('login-btn-text');
+        const loginBtnSpinner = document.getElementById('login-btn-spinner');
+
+        // Modal Handling
+        loginLink.addEventListener('click', (e) => {
             e.preventDefault();
-            const formData = {
-                name: document.getElementById('signup-name').value,
-                email: document.getElementById('signup-email').value,
-                gender: document.querySelector('input[name="gender"]:checked')?.value,
-                birthDate: `${document.getElementById('signup-year').value}-${document.getElementById('signup-month').value}-${document.getElementById('signup-day').value}`,
-                password: document.getElementById('signup-password').value
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        closeModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form Submissions
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            signupBtnText.textContent = 'Creating Account...';
+            signupBtnSpinner.style.display = 'inline-block';
+            signupBtn.disabled = true;
+            
+            // Validate passwords match
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                signupBtnText.textContent = 'Create Account';
+                signupBtnSpinner.style.display = 'none';
+                signupBtn.disabled = false;
+                return;
+            }
+            
+            // Simulate API call
+            try {
+                const formData = {
+                    name: document.getElementById('signup-name').value,
+                    email: document.getElementById('signup-email').value,
+                    gender: document.querySelector('input[name="gender"]:checked')?.value,
+                    birthDate: `${document.getElementById('signup-year').value}-${document.getElementById('signup-month').value}-${document.getElementById('signup-day').value}`,
+                    password: password
+                };
+                
+                console.log('Signup data:', formData);
+                
+                // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                alert('Account created successfully! Redirecting to dashboard...');
+                // In a real app, you would redirect here
+                // window.location.href = '/dashboard.html';
+                
+            } catch (error) {
+                console.error('Signup error:', error);
+                alert('Error creating account. Please try again.');
+            } finally {
+                signupBtnText.textContent = 'Create Account';
+                signupBtnSpinner.style.display = 'none';
+                signupBtn.disabled = false;
+            }
+        });
+
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            loginBtnText.textContent = 'Logging In...';
+            loginBtnSpinner.style.display = 'inline-block';
+            loginBtn.disabled = true;
+            
+            try {
+                const formData = {
+                    email: document.getElementById('login-email').value,
+                    password: document.getElementById('login-password').value
+                };
+                
+                console.log('Login data:', formData);
+                
+                // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                alert('Login successful! Redirecting to dashboard...');
+                // In a real app, you would redirect here
+                // window.location.href = '/dashboard.html';
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Invalid email or password. Please try again.');
+            } finally {
+                loginBtnText.textContent = 'Log In';
+                loginBtnSpinner.style.display = 'none';
+                loginBtn.disabled = false;
+            }
+        });
+
+        // Google Sign-In Handler
+        function handleGoogleSignIn(response) {
+            console.log('Google sign-in response:', response);
+            
+            // Extract user data
+            const userData = {
+                id: response.credential,
+                name: response.name,
+                email: response.email,
+                picture: response.picture
             };
             
-            console.log('Signup data:', formData);
-            alert('Account created (demo). Backend integration needed');
-        });
+            console.log('Google user data:', userData);
+            
+            // Show loading state
+            const btn = document.querySelector('.g_id_signin');
+            btn.innerHTML = '<div class="spinner"></div> Processing...';
+            
+            // Simulate API call to your backend
+            setTimeout(() => {
+                alert(`Google sign-in successful! Welcome ${userData.name}`);
+                // In a real app, you would:
+                // 1. Send the credential to your backend
+                // 2. Verify it and create/login the user
+                // 3. Redirect to dashboard
+                
+                // Reset button
+                btn.innerHTML = '';
+                window.location.href = '/dashboard.html';
+            }, 1500);
+        }
 
         // Flashing effect
         const brandPanel = document.querySelector('.brand-panel');
