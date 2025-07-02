@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultrasound Imaging | TheUmTech.Site</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Ultrasound Specific Colors */
+        :root {
+            --primary-color: #4d96ff;
+            --secondary-color: #4fd1c5;
+            --accent-color: #ff9f43;
+            --dark-color: #2c3e50;
+        }
+        
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: var(--dark-color);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(77, 150, 255, 0.3) 0%, 
+                rgba(79, 209, 197, 0.3) 50%, 
+                rgba(255, 159, 67, 0.3) 100%);
+            opacity: 0;
+            animation: flash 4s infinite;
+            z-index: 0;
+        }
+        
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            20%, 60% { opacity: 0.5; }
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-login:hover {
+            background-color: white;
+            color: var(--dark-color);
+        }
+        
+        .btn-signup {
+            background-color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            color: #333;
+        }
+        
+        .btn-signup:hover {
+            background-color: transparent;
+            color: white;
+        }
+        
+        /* Course Hero */
+        .course-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 100px 5% 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .course-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .course-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .course-hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .meta-item i {
+            color: var(--accent-color);
+        }
+        
+        /* Course Container */
+        .course-container {
+            display: flex;
+            padding: 60px 5%;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .course-main {
+            flex: 2;
+        }
+        
+        .course-sidebar {
+            flex: 1;
+        }
+        
+        /* Course Card */
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .course-card h2 {
+            font-size: 32px;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .course-card h3 {
+            font-size: 24px;
+            color: var(--dark-color);
+            margin: 30px 0 15px;
+        }
+        
+        .course-card p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .course-card ul, .course-card ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .course-card li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* Instructor */
+        .instructor {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+        
+        .instructor img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .instructor-info h4 {
+            font-size: 20px;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .instructor-info p {
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        /* Ultrasound Specific */
+        .probe-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .probe-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .probe-card h4 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .probe-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        
+        /* Sidebar */
+        .sidebar-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 30px;
+        }
+        
+        .price-box {
+            text-align: center;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: normal;
+            color: #666;
+        }
+        
+        .btn-enroll {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 20px 0;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn-enroll:hover {
+            background: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .features-list {
+            list-style: none;
+        }
+        
+        .features-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        /* Modules */
+        .module-list {
+            list-style: none;
+        }
+        
+        .module-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .module-item a {
+            display: flex;
+            align-items: center;
+            color: #555;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .module-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .module-item i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: #3a3a3a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #3a3a3a;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .course-container {
+                flex-direction: column;
+            }
+            
+            .sidebar-card {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .course-hero h1 {
+                font-size: 36px;
+            }
+            
+            .course-hero p {
+                font-size: 18px;
+            }
+            
+            .course-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">TheUmTech.<span>Site</span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Blog</a>
+            <a href="#">Notes</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="login.html"><button class="btn btn-login">Login</button></a>
+            <a href="signup.html"><button class="btn btn-signup">Signup</button></a>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="course-hero-content">
+            <span class="badge">NEW RELEASE</span>
+            <h1>Ultrasound Imaging Mastery</h1>
+            <p>Comprehensive training in diagnostic ultrasound across all specialties, from basic physics to advanced Doppler techniques and interventional procedures.</p>
+            <div class="course-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> 18 Lessons
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-chart-line"></i> Intermediate Level
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-certificate"></i> CME Accredited
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Container -->
+    <div class="course-container">
+        <main class="course-main">
+            <!-- Course Overview -->
+            <div class="course-card">
+                <h2>Course Overview</h2>
+                <p>This comprehensive ultrasound course provides in-depth training across all major applications of diagnostic medical sonography. You'll learn through a combination of didactic lectures, hands-on scanning demonstrations, and interpretation of real clinical cases.</p>
+                
+                <div class="instructor">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Dr. Sarah Johnson">
+                    <div class="instructor-info">
+                        <h4>Dr. Sarah Johnson, RDMS, RDCS</h4>
+                        <p>Ultrasound Specialist with 15+ years of clinical and teaching experience</p>
+                    </div>
+                </div>
+                
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>Fundamental physics of ultrasound and instrumentation</li>
+                    <li>Proper scanning techniques and transducer manipulation</li>
+                    <li>Normal anatomy and common pathologies across all specialties</li>
+                    <li>Doppler principles and hemodynamic assessment</li>
+                    <li>Protocols for abdominal, obstetric, vascular, and MSK ultrasound</li>
+                    <li>Image optimization and artifact recognition</li>
+                </ul>
+                
+                <h3>Ultrasound Probe Types</h3>
+                <div class="probe-types">
+                    <div class="probe-card">
+                        <h4>Convex Array</h4>
+                        <p>Low frequency (2-5MHz) for abdominal and pelvic imaging</p>
+                    </div>
+                    <div class="probe-card">
+                        <h4>Linear Array</h4>
+                        <p>High frequency (7-15MHz) for vascular and small parts</p>
+                    </div>
+                    <div class="probe-card">
+                        <h4>Phased Array</h4>
+                        <p>Small footprint for cardiac and intercostal imaging</p>
+                    </div>
+                    <div class="probe-card">
+                        <h4>Endocavitary</h4>
+                        <p>Specialized for transvaginal and transrectal exams</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Curriculum -->
+            <div class="course-card">
+                <h2>Course Curriculum</h2>
+                
+                <h3>Module 1: Ultrasound Physics & Instrumentation</h3>
+                <ul>
+                    <li>Sound wave properties and tissue interactions</li>
+                    <li>Transducer technology and beam formation</li>
+                    <li>Image resolution and artifacts</li>
+                    <li>Doppler principles and applications</li>
+                    <li>Bioeffects and safety (ALARA principle)</li>
+                </ul>
+                
+                <h3>Module 2: Abdominal Ultrasound</h3>
+                <ul>
+                    <li>Liver, gallbladder, and biliary system</li>
+                    <li>Pancreas, spleen, and retroperitoneum</li>
+                    <li>Renal and bladder scanning</li>
+                    <li>Abdominal vasculature (aorta, IVC, portal system)</li>
+                </ul>
+                
+                <h3>Module 3: Obstetric & Gynecologic Ultrasound</h3>
+                <ul>
+                    <li>First trimester assessment</li>
+                    <li>Fetal anatomy surveys</li>
+                    <li>Doppler in obstetrics</li>
+                    <li>Gynecologic pathology</li>
+                </ul>
+                
+                <h3>Module 4: Vascular Ultrasound</h3>
+                <ul>
+                    <li>Carotid duplex imaging</li>
+                    <li>Venous insufficiency and DVT evaluation</li>
+                    <li>Arterial physiologic testing</li>
+                    <li>Hemodialysis access assessment</li>
+                </ul>
+                
+                <h3>Module 5: Small Parts & MSK Ultrasound</h3>
+                <ul>
+                    <li>Thyroid and parathyroid imaging</li>
+                    <li>Scrotal ultrasound</li>
+                    <li>Musculoskeletal applications</li>
+                    <li>Interventional procedures</li>
+                </ul>
+            </div>
+            
+            <!-- Image Gallery -->
+            <div class="course-card">
+                <h2>Clinical Applications</h2>
+                <p>Explore the diverse applications of diagnostic ultrasound through these clinical examples:</p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Abdominal Ultrasound">
+                        <div class="gallery-caption">Abdominal Ultrasound</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Obstetric Ultrasound">
+                        <div class="gallery-caption">Obstetric Ultrasound</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vascular Ultrasound">
+                        <div class="gallery-caption">Vascular Ultrasound</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Sidebar -->
+        <aside class="course-sidebar">
+            <div class="sidebar-card">
+                <div class="price-box">
+                    <h3>Enroll in Course</h3>
+                    <div class="price">$249 <span>or $39/month</span></div>
+                    <p>Lifetime access to all materials</p>
+                    <a href="#" class="btn-enroll">Enroll Now</a>
+                </div>
+                
+                <h3>Course Features</h3>
+                <ul class="features-list">
+                    <li>15+ hours of video content</li>
+                    <li>200+ clinical cases</li>
+                    <li>Interactive quizzes</li>
+                    <li>Scanning protocols PDF</li>
+                    <li>Certificate of completion</li>
+                    <li>Mobile friendly</li>
+                    <li>Instructor Q&A</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>Course Modules</h3>
+                <ul class="module-list">
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Physics & Instrumentation</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Abdominal Ultrasound</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Obstetric Ultrasound</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Gynecologic Ultrasound</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Vascular Ultrasound</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Small Parts & MSK</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Doppler Techniques</a>
+                    </li>
+                    <li class="module-item">
+                        <a href="#"><i class="fas fa-play-circle"></i> Interventional US</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>TheUmTech.Site</h3>
+                <p>Your premier destination for radiology education and professional development in medical imaging technologies.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Boston, MA</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@theumtech.site</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TheUmTech.Site. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced flashing effect with JavaScript
+        const navbar = document.querySelector('.navbar');
+        const colors = ['rgba(77, 150, 255, 0.5)', 'rgba(79, 209, 197, 0.5)', 'rgba(255, 159, 67, 0.5)'];
+        
+        function randomFlash() {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            navbar.style.boxShadow = `0 0 30px 10px ${randomColor}`;
+            setTimeout(() => {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }, 300);
+        }
+
+        // Flash every 2-4 seconds randomly
+        setInterval(randomFlash, Math.random() * 2000 + 2000);
+
+        // Module navigation
+        document.querySelectorAll('.module-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.module-item').forEach(i => {
+                    i.querySelector('a').innerHTML = i.querySelector('a').innerHTML.replace(' <i class="fas fa-check"></i>', '');
+                });
+                this.querySelector('a').innerHTML += ' <i class="fas fa-check"></i>';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Image gallery modal
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.createElement('div');
+        modal.style.display = 'none';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+        modal.style.zIndex = '1000';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.flexDirection = 'column';
+        modal.style.cursor = 'zoom-out';
+        
+        const modalImg = document.createElement('img');
+        modalImg.style.maxWidth = '90%';
+        modalImg.style.maxHeight = '90%';
+        modalImg.style.objectFit = 'contain';
+        
+        const modalCaption = document.createElement('div');
+        modalCaption.style.color = 'white';
+        modalCaption.style.marginTop = '20px';
+        modalCaption.style.fontSize = '18px';
+        
+        modal.appendChild(modalImg);
+        modal.appendChild(modalCaption);
+        document.body.appendChild(modal);
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                modalImg.src = this.querySelector('img').src;
+                modalCaption.textContent = this.querySelector('.gallery-caption').textContent;
+                modal.style.display = 'flex';
+            });
+        });
+        
+        modal.addEventListener('click', function() {
+            this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
