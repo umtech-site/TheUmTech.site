@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CT Scan Tutorials | TheUmTech.Site</title>
+    <style>
+        /* Reuse the same styles from main page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #6c63ff;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255, 0, 0, 0.3) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(128, 0, 128, 0.3) 100%);
+            opacity: 0;
+            animation: flash 3s infinite;
+            z-index: 0;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            10%, 30%, 50%, 70%, 90% { opacity: 0.7; }
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background-color: white;
+            color: #6c63ff;
+        }
+
+        .btn-signup {
+            background-color: #ffd700;
+            border: 2px solid #ffd700;
+            color: #333;
+        }
+
+        .btn-signup:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        /* Page-specific styles */
+        .tutorial-header {
+            background: linear-gradient(rgba(108, 99, 255, 0.8), rgba(74, 66, 214, 0.9)), 
+                        url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 5% 80px;
+            text-align: center;
+        }
+
+        .tutorial-header h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: #ffd700;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .breadcrumb span {
+            color: #ccc;
+        }
+
+        .tutorial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 5%;
+        }
+
+        .tutorial-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #4a42d6;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .section-subtitle {
+            font-size: 22px;
+            color: #6c63ff;
+            margin: 30px 0 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #6c63ff, #4a42d6);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #ffd700;
+            color: #333;
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .sidebar-menu a {
+            color: #333;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .sidebar-menu a:hover {
+            color: #6c63ff;
+            padding-left: 5px;
+        }
+
+        .sidebar-menu a.active {
+            color: #6c63ff;
+            font-weight: 600;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            color: #4a42d6;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: #444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #6c63ff;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .tutorial-content {
+                grid-template-columns: 1fr;
+            }
+
+            .tutorial-header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar with Flashing Lights -->
+    <nav class="navbar">
+        <div class="logo">TheUmTech.<span>Site</span></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Blog</a>
+            <a href="#">Notes</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="/vanilalogin.html"><button class="btn btn-login">Login</button></a>
+            <a href="/signup.html"><button class="btn btn-signup">Signup</button></a>
+        </div>
+    </nav>
+
+    <!-- Tutorial Header -->
+    <header class="tutorial-header">
+        <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="#">Tutorials</a>
+            <span>/</span>
+            <a href="#">CT Scan</a>
+        </div>
+        <h1>Computed Tomography (CT) Scan Tutorials</h1>
+        <p>Master the principles, techniques, and interpretation of CT imaging</p>
+    </header>
+
+    <!-- Tutorial Container -->
+    <div class="tutorial-container">
+        <div class="tutorial-content">
+            <!-- Main Content -->
+            <div class="main-content">
+                <h2 class="section-title">Introduction to CT Scanning</h2>
+                <p>Computed Tomography (CT) scanning is a medical imaging technique that uses computer-processed combinations of many X-ray measurements taken from different angles to produce cross-sectional (tomographic) images of specific areas of a scanned object, allowing the user to see inside the object without cutting.</p>
+                
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="CT Scanner Machine">
+                    <p class="image-caption">Modern CT Scanner with Advanced Imaging Capabilities</p>
+                </div>
+
+                <h3 class="section-subtitle">How CT Scans Work</h3>
+                <p>A CT scan works by using a rotating X-ray tube and digital X-ray detectors positioned opposite each other in a circular gantry. As the patient moves through the machine, the X-ray tube rotates around the body, emitting narrow beams of X-rays that pass through the body and are detected on the opposite side.</p>
+                
+                <p>The computer processes this information to create cross-sectional images or "slices" of the body. These slices can be viewed individually or stacked together to create 3D images of the patient's anatomy.</p>
+
+                <h3 class="section-subtitle">Key Components of a CT System</h3>
+                <ul>
+                    <li><strong>Gantry:</strong> The donut-shaped part that contains the X-ray tube and detectors</li>
+                    <li><strong>X-ray Tube:</strong> Generates the X-ray beams</li>
+                    <li><strong>Detectors:</strong> Capture the X-rays that pass through the body</li>
+                    <li><strong>Patient Table:</strong> Moves the patient through the gantry</li>
+                    <li><strong>Computer System:</strong> Processes the data to create images</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>Ready to Dive Deeper into CT Technology?</h3>
+                    <p>Enroll in our comprehensive CT Scan Interpretation Course to master this essential radiology skill.</p>
+                    <a href="#" class="btn-primary">Enroll Now</a>
+                </div>
+
+                <h3 class="section-subtitle">Common CT Scan Protocols</h3>
+                <p>Different types of CT scans require specific protocols to optimize image quality while minimizing radiation exposure:</p>
+                
+                <table>
+                    <tr>
+                        <th>Scan Type</th>
+                        <th>Slice Thickness</th>
+                        <th>KVp</th>
+                        <th>mA</th>
+                        <th>Contrast</th>
+                    </tr>
+                    <tr>
+                        <td>Head CT</td>
+                        <td>5mm</td>
+                        <td>120</td>
+                        <td>200-300</td>
+                        <td>Optional</td>
+                    </tr>
+                    <tr>
+                        <td>Chest CT</td>
+                        <td>1-2.5mm</td>
+                        <td>120</td>
+                        <td>100-200</td>
+                        <td>Often used</td>
+                    </tr>
+                    <tr>
+                        <td>Abdomen/Pelvis</td>
+                        <td>2.5-5mm</td>
+                        <td>120</td>
+                        <td>150-250</td>
+                        <td>Usually used</td>
+                    </tr>
+                </table>
+
+                <h3 class="section-subtitle">CT Image Interpretation Basics</h3>
+                <p>When interpreting CT images, radiologists evaluate several key aspects:</p>
+                <ol>
+                    <li><strong>Anatomy:</strong> Identify normal anatomical structures</li>
+                    <li><strong>Density:</strong> Assess tissue density (measured in Hounsfield units)</li>
+                    <li><strong>Pathology:</strong> Look for abnormalities or disease processes</li>
+                    <li><strong>Artifacts:</strong> Recognize and account for imaging artifacts</li>
+                    <li><strong>Clinical Correlation:</strong> Relate findings to patient history</li>
+                </ol>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3 class="sidebar-title">CT Scan Tutorials</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active">CT Basics</a></li>
+                    <li><a href="#">CT Physics</a></li>
+                    <li><a href="#">Head CT Interpretation</a></li>
+                    <li><a href="#">Chest CT Interpretation</a></li>
+                    <li><a href="#">Abdominal CT Interpretation</a></li>
+                    <li><a href="#">CT Angiography</a></li>
+                    <li><a href="#">CT Safety & Protocols</a></li>
+                    <li><a href="#">Advanced CT Techniques</a></li>
+                </ul>
+
+                <h3 class="sidebar-title" style="margin-top: 30px;">Related Courses</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="#">CT Certification Program</a></li>
+                    <li><a href="#">Emergency CT Interpretation</a></li>
+                    <li><a href="#">Pediatric CT Protocols</a></li>
+                    <li><a href="#">CT Radiation Safety</a></li>
+                </ul>
+
+                <div style="margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #4a42d6; margin-bottom: 15px;">Quick Facts</h4>
+                    <p style="font-size: 14px; color: #555;"><strong>Invented:</strong> 1972 by Godfrey Hounsfield</p>
+                    <p style="font-size: 14px; color: #555;"><strong>First Clinical Use:</strong> 1971 at Atkinson Morley Hospital</p>
+                    <p style="font-size: 14px; color: #555;"><strong>Nobel Prize:</strong> 1979 (Hounsfield & Cormack)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>TheUmTech.Site</h3>
+                <p>Your premier destination for radiology education and professional development in medical imaging technologies.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Boston, MA</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@theumtech.site</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TheUmTech.Site. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced flashing effect with JavaScript
+        const navbar = document.querySelector('.navbar');
+        const colors = ['rgba(255, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)', 'rgba(128, 0, 128, 0.5)'];
+        
+        function randomFlash() {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            navbar.style.boxShadow = `0 0 30px 10px ${randomColor}`;
+            setTimeout(() => {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }, 200);
+        }
+
+        // Flash every 1-3 seconds randomly
+        setInterval(randomFlash, Math.random() * 2000 + 1000);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

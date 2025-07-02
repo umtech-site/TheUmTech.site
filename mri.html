@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheUmTech.Site | MRI Mastery</title>
+    <style>
+        /* Inherit all base styles from main page */
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar with Flashing Lights */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #6c63ff;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255, 0, 0, 0.3) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(128, 0, 128, 0.3) 100%);
+            opacity: 0;
+            animation: flash 3s infinite;
+            z-index: 0;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            10%, 30%, 50%, 70%, 90% { opacity: 0.7; }
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: #ffd700; /* Gold accent */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background-color: white;
+            color: #6c63ff;
+        }
+
+        .btn-signup {
+            background-color: #ffd700;
+            border: 2px solid #ffd700;
+            color: #333;
+        }
+
+        .btn-signup:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        /* MRI Hero Section */
+        .mri-hero {
+            text-align: center;
+            padding: 100px 5%;
+            background: linear-gradient(rgba(108, 99, 255, 0.8), rgba(74, 66, 214, 0.9)), 
+                        url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+        }
+
+        .mri-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .mri-hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background-color: #ffd700;
+            color: #333;
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* MRI Basics Section */
+        .mri-basics {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #4a42d6;
+            text-align: center;
+        }
+
+        .mri-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .mri-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .mri-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .mri-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #6c63ff;
+        }
+
+        .mri-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .mri-list {
+            margin: 30px 0;
+        }
+
+        .mri-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .mri-list i {
+            color: #6c63ff;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        /* MRI Sequences Section */
+        .mri-sequences {
+            padding: 80px 5%;
+            background-color: #f0f2f5;
+        }
+
+        .sequence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .sequence-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .sequence-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .sequence-icon {
+            font-size: 40px;
+            color: #6c63ff;
+            margin-bottom: 20px;
+        }
+
+        .sequence-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* MRI Applications Section */
+        .mri-applications {
+            padding: 80px 5%;
+        }
+
+        .application-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 18px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #6c63ff;
+            border-bottom: 3px solid #6c63ff;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .application-content {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MRI Learning Path */
+        .learning-path {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #6c63ff, #4a42d6);
+            color: white;
+            text-align: center;
+        }
+
+        .path-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .path-steps::before {
+            content: "";
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            width: 20%;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #ffd700;
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .mri-cta {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .mri-cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #4a42d6;
+        }
+
+        .mri-cta .btn-primary {
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: #444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #6c63ff;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .mri-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .path-steps {
+                flex-wrap: wrap;
+            }
+            
+            .step {
+                width: 50%;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .mri-hero h1 {
+                font-size: 36px;
+            }
+
+            .mri-hero p {
+                font-size: 18px;
+            }
+            
+            .step {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar with Flashing Lights -->
+    <nav class="navbar">
+        <div class="logo">TheUmTech.<span>Site</span></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Blog</a>
+            <a href="#">Notes</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-login">Login</button>
+            <button class="btn btn-signup">Signup</button>
+        </div>
+    </nav>
+
+    <!-- MRI Hero Section -->
+    <section class="mri-hero">
+        <h1>Master MRI Technology</h1>
+        <p>Comprehensive training in Magnetic Resonance Imaging - from basic principles to advanced interpretation techniques for medical professionals.</p>
+        <a href="#" class="btn-primary">Start MRI Course Now</a>
+    </section>
+
+    <!-- MRI Basics Section -->
+    <section class="mri-basics">
+        <h2 class="section-title">MRI Fundamentals</h2>
+        <div class="mri-content">
+            <div class="mri-image">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="MRI Machine">
+            </div>
+            <div class="mri-text">
+                <h3>Understanding Magnetic Resonance Imaging</h3>
+                <p>Magnetic Resonance Imaging (MRI) is a non-invasive medical imaging technique that uses strong magnetic fields and radio waves to generate detailed images of the organs and tissues in your body.</p>
+                <p>Unlike X-rays and CT scans, MRI doesn't use ionizing radiation, making it particularly valuable for frequent imaging or imaging of sensitive tissues.</p>
+                
+                <ul class="mri-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Uses powerful magnets and radiofrequency pulses</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Produces detailed cross-sectional images of the body</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Particularly effective for imaging soft tissues</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Multiple imaging sequences for different diagnostic purposes</span>
+                    </li>
+                </ul>
+                
+                <a href="#" class="btn-primary">Learn Basic Principles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MRI Sequences Section -->
+    <section class="mri-sequences">
+        <h2 class="section-title">MRI Sequences Explained</h2>
+        <div class="sequence-grid">
+            <div class="sequence-card">
+                <div class="sequence-icon">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h3 class="sequence-title">T1-Weighted</h3>
+                <p>Excellent for anatomical detail, showing fat as bright and water as dark. Ideal for viewing normal anatomy and detecting fatty tissue.</p>
+            </div>
+            <div class="sequence-card">
+                <div class="sequence-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3 class="sequence-title">T2-Weighted</h3>
+                <p>Water appears bright, fat somewhat less bright. Excellent for detecting pathology as most pathological processes increase water content.</p>
+            </div>
+            <div class="sequence-card">
+                <div class="sequence-icon">
+                    <i class="fas fa-magnet"></i>
+                </div>
+                <h3 class="sequence-title">FLAIR</h3>
+                <p>Fluid-Attenuated Inversion Recovery suppresses the CSF signal to make lesions near ventricles more visible, crucial for MS evaluation.</p>
+            </div>
+            <div class="sequence-card">
+                <div class="sequence-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="sequence-title">Diffusion-Weighted</h3>
+                <p>Sensitive to microscopic water movement, essential for early stroke detection and distinguishing cysts from solid lesions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MRI Applications Section -->
+    <section class="mri-applications">
+        <h2 class="section-title">Clinical Applications of MRI</h2>
+        
+        <div class="application-tabs">
+            <button class="tab-btn active" data-tab="neuro">Neurological</button>
+            <button class="tab-btn" data-tab="musculoskeletal">Musculoskeletal</button>
+            <button class="tab-btn" data-tab="cardiac">Cardiac</button>
+            <button class="tab-btn" data-tab="abdominal">Abdominal</button>
+        </div>
+        
+        <div class="tab-content active" id="neuro">
+            <div class="application-content">
+                <h3>Neurological MRI Applications</h3>
+                <p>MRI is the imaging modality of choice for most neurological conditions due to its superior soft tissue contrast and lack of ionizing radiation.</p>
+                <ul class="mri-list">
+                    <li><i class="fas fa-brain"></i> Stroke evaluation (especially with diffusion-weighted imaging)</li>
+                    <li><i class="fas fa-brain"></i> Multiple sclerosis diagnosis and monitoring</li>
+                    <li><i class="fas fa-brain"></i> Brain tumor characterization and surgical planning</li>
+                    <li><i class="fas fa-brain"></i> Epilepsy evaluation (hippocampal sclerosis detection)</li>
+                    <li><i class="fas fa-brain"></i> Neurodegenerative disorders (Alzheimer's, Parkinson's)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="musculoskeletal">
+            <div class="application-content">
+                <h3>Musculoskeletal MRI Applications</h3>
+                <p>MRI provides unparalleled detail of soft tissues, joints, and bone marrow, making it ideal for orthopedic and sports medicine applications.</p>
+                <ul class="mri-list">
+                    <li><i class="fas fa-bone"></i> Joint injuries (ACL tears, rotator cuff tears, labral tears)</li>
+                    <li><i class="fas fa-bone"></i> Bone marrow abnormalities (osteomyelitis, metastases)</li>
+                    <li><i class="fas fa-bone"></i> Spinal disorders (disc herniations, spinal stenosis)</li>
+                    <li><i class="fas fa-bone"></i> Soft tissue tumors characterization</li>
+                    <li><i class="fas fa-bone"></i> Stress fractures detection</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="cardiac">
+            <div class="application-content">
+                <h3>Cardiac MRI Applications</h3>
+                <p>Cardiac MRI provides comprehensive evaluation of cardiac structure, function, viability, and blood flow without radiation exposure.</p>
+                <ul class="mri-list">
+                    <li><i class="fas fa-heart"></i> Congenital heart disease evaluation</li>
+                    <li><i class="fas fa-heart"></i> Cardiomyopathies assessment</li>
+                    <li><i class="fas fa-heart"></i> Myocardial viability post-MI</li>
+                    <li><i class="fas fa-heart"></i> Cardiac tumors characterization</li>
+                    <li><i class="fas fa-heart"></i> Valvular heart disease assessment</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="abdominal">
+            <div class="application-content">
+                <h3>Abdominal MRI Applications</h3>
+                <p>MRI is particularly valuable for abdominal imaging where soft tissue contrast is essential and radiation exposure is a concern.</p>
+                <ul class="mri-list">
+                    <li><i class="fas fa-liver"></i> Liver lesion characterization (HCC, hemangiomas, FNH)</li>
+                    <li><i class="fas fa-bile"></i> Biliary tree evaluation (MRCP)</li>
+                    <li><i class="fas fa-prostate"></i> Prostate cancer detection and staging</li>
+                    <li><i class="fas fa-uterus"></i> Pelvic floor and gynecological disorders</li>
+                    <li><i class="fas fa-kidney"></i> Renal mass characterization</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section class="learning-path">
+        <h2 class="section-title">MRI Learning Path</h2>
+        <p>Follow our structured curriculum to master MRI interpretation step by step</p>
+        
+        <div class="path-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4 class="step-title">Physics Basics</h4>
+                <p>Understand magnetic resonance principles</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4 class="step-title">Sequence Fundamentals</h4>
+                <p>Learn T1, T2, FLAIR, DWI basics</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4 class="step-title">Neuroanatomy</h4>
+                <p>Master brain and spine MRI anatomy</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h4 class="step-title">Pathology Recognition</h4>
+                <p>Identify common pathological patterns</p>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <h4 class="step-title">Advanced Applications</h4>
+                <p>Explore perfusion, spectroscopy, fMRI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="mri-cta">
+        <h2>Ready to Become an MRI Expert?</h2>
+        <p>Join our comprehensive MRI certification program with hands-on case studies and expert guidance</p>
+        <a href="#" class="btn-primary">Enroll in MRI Mastery Course</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>TheUmTech.Site</h3>
+                <p>Your premier destination for radiology education and professional development in medical imaging technologies.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Boston, MA</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@theumtech.site</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TheUmTech.Site. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced flashing effect with JavaScript
+        const navbar = document.querySelector('.navbar');
+        const colors = ['rgba(255, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)', 'rgba(128, 0, 128, 0.5)'];
+        
+        function randomFlash() {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            navbar.style.boxShadow = `0 0 30px 10px ${randomColor}`;
+            setTimeout(() => {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }, 200);
+        }
+
+        // Flash every 1-3 seconds randomly
+        setInterval(randomFlash, Math.random() * 2000 + 1000);
+        
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
